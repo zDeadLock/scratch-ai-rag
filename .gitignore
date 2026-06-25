@@ -1,0 +1,4 @@
+local_assets/
+.venv/
+*.py[cod]
+__pycache__/
