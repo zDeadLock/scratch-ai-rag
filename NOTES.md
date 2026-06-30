@@ -54,3 +54,25 @@ concepts learned (summary):
 -tested the RAG model with multiple prompts and after some basic prompt engineering got 100% success rates on all. prompts included retrieving validation token, retrieving username of the file creator (mentioned in the file), and retrieving the file username but in JSON format. 
 
 Now beginning work on the actual LLM code. Modularity will be used to ensure easier feature expansion and debugging in the future.
+
+errors encountered:
+- UnicodeEncodeError utf-8 codec cannot encode character. caused by mathematical symbols. fixed by writing a sanitizing script that removed these symbols.
+- cannot assign to attribute 'text' for class 'document'. fixed by replacing 'doc.text' in documents which was being blocked as its a read-only attribute with llamaindex's official setter method '.set_content()'.
+- ResponseError 404 page not found status code 404. was caused by a broken OLLAMA_URL in config.py. fixed by correcting the url.
+- UnboundLocalError cannot access local variable index where its not associated with a value. caused by a missing index assignment line in retrieve_context in engine.py. was initially solved by adding an 'index = None' at the start of 'retrieve_context()' in engine.py but that resulted in a seperate error so had to rewrite parts of engine.py.
+- AttributeError 'NoneType' object has no attribute 'as_retriever'. casued by adding 'index = None' in 'retrieve_context()'. the broken line causing this error was 'load_index_from_storage(storage_context)' which was changed to 'index = load_index_from_storage(storage_context)' which fixed both errors. 
+
+
+code for the basic RAG is now fully complete.
+features added:
+
+- chat loop to allow followup questions. done with encasing 'main()' in app.py in a while loop.
+- RAM cache to store the database in temporary memory to allow for much faster responses on follow up prompts.
+- context continuity by allowing the model to remember the topic in previous prompts or questions and providing relevant context.
+
+
+planned features:
+- source citations with the exact title and page number of the document used at the end of every generated response
+- a GUI either terminal based or web based. (either Streamlit or Textual)
+- hybrid search which combines vector search with keyword matching for even more accurate responses
+- adding a reranker whose sole purpose is to rerank the top extracted chunks to ensure even more contextual accuracy
