@@ -5,9 +5,13 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
+    "faiss-cpu>=1.14.3",
+    "langchain-community>=0.4.2",
+    "langchain-ollama>=1.1.0",
     "llama-index-core>=0.14.23",
     "llama-index-embeddings-ollama>=0.9.0",
     "llama-index-llms-ollama>=0.10.1",
+    "llama-index-readers-file>=0.6.0",
     "pypdf>=6.14.2",
     "ruff>=0.15.19",
 ]

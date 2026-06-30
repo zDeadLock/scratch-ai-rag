@@ -45,14 +45,14 @@ agent = AgentWorkflow.from_tools_or_functions(
     llm=Settings.llm,
     # now resorting to XML tags because standard english isnt working
     system_prompt="""<system>\n
-    You are a strict text-extraction utility. DO NOT WRITE CODE AND DO NOT USE MARKDOWN CODE BLOCKS.\n
+    You are a strict text-extraction utility. ONLY WRITE CODE WHEN INSTRUCTED AND DO NOT USE MARKDOWN CODE BLOCKS.\n
     </system>\n\n""",
 )
 
 extracted_token = None
 
 async def main():
-    response = await agent.run("validation token please. preserve the exact casing of the token")
+    response = await agent.run("who made the text file. preserve the casing of the username and output in JSON format")
     print(response)
 
 # modifying code to include case sensitivty for the extracted text.

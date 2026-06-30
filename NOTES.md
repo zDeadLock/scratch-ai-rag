@@ -49,3 +49,8 @@ concepts learned (summary):
 1. system tag isolation. XML tags force tiny models to strictly follow the given instructions by forcing them into utility modes.
 
 2. recency/proximity bias. formatiing constraints and specific instructions work best when appended directly to the query string, not in the system prompt.
+
+
+-tested the RAG model with multiple prompts and after some basic prompt engineering got 100% success rates on all. prompts included retrieving validation token, retrieving username of the file creator (mentioned in the file), and retrieving the file username but in JSON format. 
+
+Now beginning work on the actual LLM code. Modularity will be used to ensure easier feature expansion and debugging in the future.
